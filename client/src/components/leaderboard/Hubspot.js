@@ -86,6 +86,15 @@ class HubspotForm extends React.Component {
         this.props.toast("This alias is already taken");
         event.stopPropagation();
       }
+      if (filter.isProfane(email)) {
+        this.props.toast("Please don't use offensive words in your email");
+        event.stopPropagation();
+        return;
+      }
+      if (checkIfAliasIsPresent(alias)) {
+        this.props.toast("This alias is already taken");
+        event.stopPropagation();
+      }
     });
   };
 
@@ -93,10 +102,6 @@ class HubspotForm extends React.Component {
     const styles = getComputedStyle(document.documentElement);
     const textColor = styles.getPropertyValue("--secondary-color");
     form.style.color = textColor;
-  };
-
-  onFormSubmit = (form, values) => {
-    console.log(values);
   };
 
   render() {
